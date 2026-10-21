@@ -7,6 +7,7 @@
     <Project Path="src/Relicbound.Simulation/Relicbound.Simulation.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Relicbound.Server.Tests/Relicbound.Server.Tests.csproj" />
     <Project Path="tests/Relicbound.Simulation.Tests/Relicbound.Simulation.Tests.csproj" />
   </Folder>
   <Project Path="RelicBound/RelicBound.csproj" />

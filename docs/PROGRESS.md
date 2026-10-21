@@ -162,11 +162,13 @@ pending clarification.
 - [x] Live two-client HTTP verification and 144 passing xUnit cases.
 - [x] Unity source import kit with camera, primitive actors, and onscreen commands.
 - [ ] Unity Editor compilation, visual verification, and two-client playtest.
-- [ ] PostgreSQL persistence and durable character identity.
+- [ ] SQL Server persistence and durable character identity.
 - [ ] Owned item instances, loot awards, complete expeditions, and atomic trading.
 - [ ] Blazor companion features and production deployment.
 
-Unity Editor and PostgreSQL are not installed, as confirmed by the user.
+At this checkpoint, the user confirmed Unity Editor and PostgreSQL were not
+installed. SQL Server was selected later (see below); its installation status
+has not been checked.
 The Unity source is unverified until imported into an Editor project; the full
 roadmap is not complete. See [cooperative arena](COOPERATIVE_ARENA.md).
 
@@ -178,3 +180,28 @@ roadmap is not complete. See [cooperative arena](COOPERATIVE_ARENA.md).
   performed in this pass. Original kickoff remains unchanged.
 - Rebuilt Release with zero warnings/errors; all 144 tests passed with zero skips.
 - Documentation-only changes; no runtime or test behavior changed.
+
+## Persistence decision — October 21, 2026
+
+- Selected SQL Server instead of the earlier PostgreSQL proposal because the
+  user has existing SQL Server experience.
+- Updated current architecture, roadmap, setup, and verification references.
+- Persistence remains unimplemented; no ORM/provider, schema, migrations, or
+  connection settings have been selected or added.
+- Archived and hash-verified all 19 files in documentation v002 before editing;
+  this documentation-only update is v003. Application tests were not rerun.
+
+## Automated server integration — October 21, 2026
+
+- Added a separate Server.Tests project using the existing xUnit conventions and
+  ASP.NET Core WebApplicationFactory; solution-wide CI commands include it.
+- Added 13 HTTP cases for authorization, token-derived identity, retry/conflicting
+  sequences, cached failures, disconnect, expiry boundaries/refresh, concurrent
+  capacity/retries/conflicts, and malformed JSON.
+- Injected TimeProvider into ArenaSessions; production retains system UTC time,
+  the two-minute timeout, and the existing one-argument constructor.
+- Tests use controlled time and disable arena ticks. Live sockets, clock scheduling,
+  Unity playtesting, and SQL Server persistence remain outside this coverage.
+- Release build: zero warnings/errors. All 157 tests passed with zero skips.
+  Restore/build succeeded outside the sandbox after TLS/artifact-access failures.
+- Archived and hash-verified all 19 files in v003 before updating to v004.

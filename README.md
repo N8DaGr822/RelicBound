@@ -72,6 +72,7 @@ and playtesting remain pending installation of the Editor.
 | Relicbound.Sandbox | .NET 10 | Console scenario runner; references Simulation |
 | Relicbound.Server | .NET 10 | Session endpoints and authoritative arena clock |
 | Relicbound.Simulation.Tests | .NET 10 | Automated simulation tests; references Simulation |
+| Relicbound.Server.Tests | .NET 10 | In-memory HTTP integration tests; references Server |
 | RelicBound | .NET 10 | Existing ASP.NET Core starter app, preserved without gameplay dependencies |
 
 Nullable analysis is enabled in every project. `.editorconfig` provides basic

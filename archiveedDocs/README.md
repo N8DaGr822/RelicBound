@@ -6,6 +6,8 @@ The exact folder spelling `archiveedDocs` follows the user's request.
 
 | Archived version | Archive date (America/Chicago) | Reason |
 | --- | --- | --- |
+| [v003](v003_2026-10-21/README.md) | 2026-10-21 | Before server HTTP integration coverage; 19 files copied and hash-verified |
+| [v002](v002_2026-10-21/README.md) | 2026-10-21 | Before selecting SQL Server for persistence; 19 files copied and hash-verified |
 | [v001](v001_2026-10-21/README.md) | 2026-10-21 | Baseline before introducing documentation versioning; 17 files copied and hash-verified |
 
 Each snapshot includes the root README and complete docs tree as they existed

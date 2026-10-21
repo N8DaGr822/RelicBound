@@ -129,5 +129,9 @@ finally {
 For two-client verification, create two sessions and query the same world with
 both tokens. Interact using only the first; only that player's InfusionUnlocked
 should become true. Missing and removed tokens should receive 401. The prior
-implementation run performed this live smoke check; it is not an automated HTTP
-integration-test suite.
+implementation run performed this live smoke check. The automated
+[ArenaHttpTests](../tests/Relicbound.Server.Tests/ArenaHttpTests.cs) now cover shared
+state and token identity, authorization, retries, disconnect, expiry, concurrent
+requests, and malformed JSON using an in-memory HTTP host. They do not replace
+live network or Unity playtesting. Session time uses TimeProvider.System in
+production and a manual provider in tests; the two-minute rule is unchanged.

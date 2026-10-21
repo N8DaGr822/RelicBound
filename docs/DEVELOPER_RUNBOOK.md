@@ -3,12 +3,13 @@
 ## Prerequisites
 
 Use the .NET 10 SDK and `Relicbound.slnx`. Commands run from the repository root
-in PowerShell. NuGet access is needed for the initial restore. Unity and PostgreSQL
+in PowerShell. NuGet access is needed for the initial restore. Unity and SQL Server
 are not required to build or test the current .NET solution.
 
 Unity Hub was found in the earlier environment inspection. The user last confirmed
-Unity Editor and PostgreSQL were not installed; this documentation pass did not
-recheck installations. There is no database connection or migration to run yet.
+Unity Editor was not installed; this documentation pass did not recheck it.
+SQL Server is the selected database; its installation status has not been checked.
+There is no database connection or migration to run yet.
 
 ## Build and verify
 
@@ -71,12 +72,16 @@ independently of their maintained repository sources.
 | ReactionCombatTests | Cycles, FIFO order, event budget, atomic failure |
 | ProtectiveMasteryTests | Barrier substitution, absorption, prerequisites, cap |
 | GameWorldTests | Retries, isolation, cooperative shatter, branches, determinism, capacity |
+| ArenaHttpTests | HTTP authorization, token identity, retries, disconnect, expiry boundaries/refresh, concurrent sessions/commands, malformed JSON |
 
-Tests are under [Relicbound.Simulation.Tests](../tests/Relicbound.Simulation.Tests).
-There is no automated HTTP integration suite or Unity test suite. Passing xUnit
-does not verify Unity rendering, session expiry timing, PostgreSQL transactions,
+Tests are under [Relicbound.Simulation.Tests](../tests/Relicbound.Simulation.Tests)
+and [Relicbound.Server.Tests](../tests/Relicbound.Server.Tests). The HTTP suite uses
+WebApplicationFactory with a manual TimeProvider and the arena clock disabled;
+it covers the request pipeline without real sockets or wall-clock delays.
+There is no Unity test suite. Passing xUnit
+does not verify Unity rendering, live clock/network timing, SQL Server transactions,
 or full gameplay balance. CI restores/builds/tests the .NET solution on Ubuntu;
-it does not run Unity, PostgreSQL, Sandbox, or the live HTTP smoke scenario.
+it does not run Unity, SQL Server, Sandbox, or the live HTTP smoke scenario.
 Hosted CI has not been verified.
 
 ## Troubleshooting

@@ -8,17 +8,18 @@ This is the current status reference; older milestone test counts are historical
 | Check | Result | Evidence boundary |
 | --- | --- | --- |
 | Release build, October 21 | Passed; zero warnings/errors | Current working tree; dotnet build with Release and --no-restore |
-| xUnit, October 21 | 144 passed, zero failed/skipped | dotnet test with Release, --no-build, and --no-restore |
-| Sandbox, preceding implementation pass | Passed: 40/52 damage, progression, barriers, rejection cases | Executed locally; not re-run for this documentation-only pass |
+| xUnit, October 21 | 157 passed (144 simulation + 13 HTTP), zero failed/skipped | dotnet test with Release, --no-build, and --no-restore |
+| Sandbox, preceding implementation pass | Passed: 40/52 damage, progression, barriers, rejection cases | Executed locally; not re-run for this server-test update |
+| Automated HTTP integration, October 21 | 13 passed | Real endpoint handlers and JSON via WebApplicationFactory; controlled session time and disabled arena clock; not live socket or latency verification |
 | Two-client live HTTP smoke, preceding pass | Shared state, personal discovery, missing/removed-token rejection passed | Manual check; not an automated integration suite or a fresh run in this pass |
 | Earlier fresh-source verification | 124 tests passed with restore/build/Sandbox | Earlier revision copied without bin/obj to a temporary directory; not a Git checkout or verification of later changes |
 | Unity importer syntax, preceding pass | Passed | PowerShell syntax only; not proof of Unity compilation or rendering |
 | Unity compile and two-client playtest | Not run | Editor last confirmed absent by user |
-| PostgreSQL integration | Not run | Runtime last confirmed absent; persistence code/schema also not implemented |
+| SQL Server integration | Not run | Selected database; installation status not checked; persistence code/schema not implemented |
 | Hosted CI | Not verified | Workflow exists; local build is not a hosted run |
 
-This documentation pass changes no gameplay, server, client, project, or test code.
-Build/test used existing restored dependencies. Installation state was not rechecked.
+This update adds server HTTP tests and injects TimeProvider for session expiry; production uses the system clock and retains the existing timeout.
+Dependencies were restored before the Release build/test. Restore and build required execution outside the sandbox after TLS and artifact-access failures. Installation state was not rechecked.
 
 ## Implemented behavior
 
@@ -38,7 +39,7 @@ Build/test used existing restored dependencies. Installation state was not reche
 
 ## Open work
 
-Unity validation, durable identity and PostgreSQL persistence, owned item loot,
+Unity validation, durable identity and SQL Server persistence, owned item loot,
 complete expedition lifecycle, atomic barter, and Blazor companion features remain
 unfinished. Production networking, account security, operations, and broader
 automated integration coverage also remain open.

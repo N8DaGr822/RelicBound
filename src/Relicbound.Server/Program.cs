@@ -9,6 +9,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.PropertyNamingPolicy = null;
 });
 builder.Services.AddSingleton<GameWorld>();
+builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<ArenaSessions>();
 builder.Services.AddHostedService<ArenaClock>();
 var app = builder.Build();
@@ -27,3 +28,6 @@ app.MapDelete("/api/session", (HttpContext context, ArenaSessions sessions) =>
     sessions.Remove(context.Request.Headers.Authorization.ToString()));
 
 app.Run();
+
+// HTTP Tests: Expose the entry point to WebApplicationFactory.
+public partial class Program { }

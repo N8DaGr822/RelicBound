@@ -36,9 +36,10 @@ as a design reference. Its unchecked backlog is not a live completion tracker.
 
 ## Documentation maintenance
 
-See the [current version and history](VERSION.md). Before future updates, archive the
+See the [current version and history](VERSION.md). Before major updates, archive the
 previous set under [archiveedDocs](../archiveedDocs/README.md), then create the next
-version. Follow the [documentation versioning policy](DOCUMENTATION_VERSIONING.md).
+version. Routine corrections and small updates stay in the current version without
+an archive. Follow the [documentation versioning policy](DOCUMENTATION_VERSIONING.md).
 
 For a behavior change, update its feature reference and relevant API examples.
 Record meaningful outcomes in PROGRESS, and put current verification evidence in

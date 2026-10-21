@@ -10,12 +10,13 @@
 | `Relicbound.Sandbox` | .NET 10 | Scripted console demonstration and optional combat event output | Simulation |
 | `Relicbound.Server` | .NET 10 / ASP.NET Core | HTTP endpoints, ephemeral sessions, 20 Hz clock | Simulation (Contracts transitively) |
 | `Relicbound.Simulation.Tests` | .NET 10 / xUnit | Domain and arena regression tests | Simulation |
+| `Relicbound.Server.Tests` | .NET 10 / xUnit | HTTP auth, retry, expiry, and concurrency tests | Server, ASP.NET Core test host |
 | `client/Relicbound.Unity` | Unity source import kit | Camera, primitive visuals, controls, HTTP transport | Copied Contracts source, Unity APIs |
 | `RelicBound` | .NET 10 / ASP.NET Core | Preserved original web starter | Not integrated with gameplay |
 
 Core is the engine compatibility boundary. Simulation runs on the server and
 does not need to run in Unity. The current Unity import kit only consumes
-Contracts, not Core or Simulation. The intended Blazor companion and PostgreSQL
+Contracts, not Core or Simulation. The intended Blazor companion and SQL Server
 storage are future parts of the architecture, not working integrations.
 
 ```mermaid

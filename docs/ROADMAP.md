@@ -9,6 +9,7 @@ The full roadmap is not complete.
 | Decision | Reason / consequence |
 | --- | --- |
 | Unity client, .NET simulation/server, future Blazor companion | Rendering stays separate from gameplay execution |
+| SQL Server for planned persistence | User's existing SQL Server experience; supersedes the earlier PostgreSQL proposal; not implemented |
 | Core and Contracts target .NET Standard 2.1 | Shared compatibility boundary; Simulation uses .NET 10 |
 | Immutable definitions, execution in code | Compose attacks without a separate Stormbreaker implementation |
 | Integer damage and logical ticks | Predictable arithmetic and repeatable ordered simulations |
@@ -30,23 +31,27 @@ GameWorld uses four. These are separate fixtures, not a global content registry.
 | --- | --- | --- |
 | Headless combat | Implemented/tested | Broader progression/encounter event coverage |
 | Unity presentation | Source import kit only | Editor compile, visual inspection, desktop build, two-client playtest and cleanup checks |
-| Authoritative cooperation | Host/arena implemented; prior live HTTP check passed | Automated HTTP auth/retry/expiry/concurrency tests; latency/disconnect/match-lifecycle playtests |
-| Persistent characters | Not implemented | Durable identity, save/load/versioning, restart recovery, failure semantics, PostgreSQL integration tests |
+| Authoritative cooperation | Host/arena implemented; prior live HTTP check passed | Automated HTTP auth/retry/expiry/concurrency tests now pass; latency/disconnect/match-lifecycle playtests remain |
+| Persistent characters | Not implemented | Durable identity, save/load/versioning, restart recovery, failure semantics, SQL Server integration tests |
 | Items and loot | Not implemented | Unique instance IDs, trusted power rolls, ownership, idempotent rewards, durable inventory |
 | Expeditions | One arena with Ruin/Silence effects | Repeatable lifecycle, completion/failure/re-entry rules, loot connection, branch outcome tests |
 | Barter | Not implemented | Tier/power eligibility, consent, ownership checks, atomic swap, idempotency, journal, concurrency/rollback tests |
 | Blazor companion | Not implemented | First dashboard/profile/build-planner feature and secure account/API integration |
 | Release/operations | Local build; CI configuration exists | Hosted CI proof, deployment, account/transport security, observability, backup/recovery, release acceptance |
 
-Absent Editor/PostgreSQL runtimes prevent their integration verification, not all
-design or source work. Persistence, loot, and trading are also unimplemented;
+Unity Editor was last confirmed absent; SQL Server installation status has not
+been checked. These do not prevent all design or source work. Persistence, loot,
+and trading are also unimplemented;
 they are not merely waiting for tests.
 
 ## Proposed persistence and trading boundary
 
-The kickoff proposes PostgreSQL storage and authoritative ownership. No schema,
-migrations, repository, ORM/provider, or connection settings exist yet. Choose
-these during implementation rather than describing a speculative schema as installed.
+SQL Server is the selected persistence database as of October 21, 2026, based on
+the user's existing experience. This supersedes the earlier PostgreSQL proposal;
+the original kickoff and archived documentation remain historical references.
+Authoritative ownership remains required. No schema, migrations, repository,
+ORM/provider, or connection settings exist yet. Choose these during implementation
+rather than describing a speculative schema as installed.
 
 A relic definition describes mechanics. An item instance should carry stable
 identity, rolls, ownership, and location. Server-derived intrinsic power should

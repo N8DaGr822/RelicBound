@@ -90,9 +90,9 @@ account login, durable reconnect, and deployment remain separate work.
 ## Verification
 
 - Release solution build: zero warnings/errors.
-- 144 xUnit cases pass, including retry idempotency, invalid command atomicity,
+- 157 xUnit cases pass (144 simulation and 13 HTTP), including retry idempotency, invalid command atomicity,
   discovery isolation, cooperative versus self freeze, snapshot isolation,
   shared branch selection, deterministic replay, and session capacity.
 - Live HTTP smoke check passed for two clients, shared state, isolated discoveries,
   missing-token rejection, and disconnected-token rejection.
-- Unity compilation/playtesting and PostgreSQL integration have not run.
+- Unity compilation/playtesting and SQL Server integration have not run.

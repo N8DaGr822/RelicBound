@@ -1,7 +1,7 @@
 # Documentation versioning policy
 
 The user requires old documentation to be archived and a new version created
-when documentation is updated. This repository uses versioned snapshots of the
+only for major documentation updates. This repository uses versioned snapshots of the
 documentation set, while keeping the latest files at stable paths.
 
 ## Layout
@@ -20,12 +20,22 @@ archiveedDocs/
 `archiveedDocs` is intentional spelling. Versions increase monotonically: v001,
 v002, v003, and so on. The date in an archive folder is the date the snapshot was
 created in America/Chicago, not necessarily its original authoring date. Multiple
-updates on one day get distinct version numbers.
+major updates on one day get distinct version numbers.
 
-## Required update workflow
+## When to archive
+
+Archive for milestone completion, substantial architecture or scope changes, and
+broad documentation rewrites. One snapshot covers the whole coherent major update.
+
+Routine corrections, clarifications, small additions, and status or test-count
+updates stay in the current version without an archive or version bump. Assess
+the significance of the update, not the number of files edited. Apply this policy
+clarification in the current version; existing archives remain unchanged.
+
+## Major update workflow
 
 1. Read `docs/VERSION.md` to identify the active version.
-2. Before editing existing documentation, copy the root `README.md` and entire
+2. Before making the major update, copy the root `README.md` and entire
    `docs/` tree into `archiveedDocs/vNNN_YYYY-MM-DD/` using that active version.
    Refuse to overwrite a folder that already exists. If it belongs to an update
    already in progress, verify it and resume that update instead of replacing it.
@@ -40,12 +50,13 @@ updates on one day get distinct version numbers.
 
 One version covers a coherent update, including corrections made while drafting
 and verifying it. It does not create a snapshot for each intermediate save.
-Future separate updates, including corrections, archive the then-current set first.
-Brand-new documents enter the new version; no fictional previous version is created.
+Future major updates archive the then-current set first, including any accumulated
+minor edits. Brand-new documents enter the active version; no fictional previous
+version is created. Minor edits still require relevant link and accuracy checks.
 
 ## Preservation rules
 
-- Treat historical snapshots as immutable. Correct old mistakes in the new version.
+- Treat historical snapshots as immutable. Correct old mistakes in the active version.
 - Preserve the original engineering kickoff as reference material.
 - Do not archive the archive itself, application source, binaries, credentials,
   or generated build directories. Archive-index bookkeeping is outside the set.

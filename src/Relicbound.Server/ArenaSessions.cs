@@ -5,11 +5,13 @@ using Relicbound.Simulation.World;
 namespace Relicbound.Server;
 
 // Session Ownership: Commands never accept a client-supplied player identity.
-public sealed class ArenaSessions(GameWorld world)
+public sealed class ArenaSessions(GameWorld world, TimeProvider timeProvider)
 {
-    private sealed record Session(string PlayerId)
+    public ArenaSessions(GameWorld world) : this(world, TimeProvider.System) { }
+
+    private sealed record Session(string PlayerId, DateTimeOffset CreatedAt)
     {
-        public DateTimeOffset LastSeen { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset LastSeen { get; set; } = CreatedAt;
     }
 
     private readonly object _gate = new();
@@ -23,7 +25,7 @@ public sealed class ArenaSessions(GameWorld world)
             var playerId = Guid.NewGuid().ToString("N");
             var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
             world.Join(playerId);
-            _sessions.Add(token, new Session(playerId));
+            _sessions.Add(token, new Session(playerId, timeProvider.GetUtcNow()));
             return new SessionReply { PlayerId = playerId, Token = token };
         }
     }
@@ -68,13 +70,13 @@ public sealed class ArenaSessions(GameWorld world)
         {
             return null;
         }
-        session.LastSeen = DateTimeOffset.UtcNow;
+        session.LastSeen = timeProvider.GetUtcNow();
         return session;
     }
 
     private void Expire()
     {
-        var cutoff = DateTimeOffset.UtcNow.AddMinutes(-2);
+        var cutoff = timeProvider.GetUtcNow().AddMinutes(-2);
         foreach (var entry in _sessions.Where(entry => entry.Value.LastSeen < cutoff).ToArray())
         {
             world.Disconnect(entry.Value.PlayerId);
