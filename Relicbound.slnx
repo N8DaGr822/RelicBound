@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Relicbound.Contracts/Relicbound.Contracts.csproj" />
+    <Project Path="src/Relicbound.Core/Relicbound.Core.csproj" />
+    <Project Path="src/Relicbound.Sandbox/Relicbound.Sandbox.csproj" />
+    <Project Path="src/Relicbound.Server/Relicbound.Server.csproj" />
+    <Project Path="src/Relicbound.Simulation/Relicbound.Simulation.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Relicbound.Simulation.Tests/Relicbound.Simulation.Tests.csproj" />
+  </Folder>
+  <Project Path="RelicBound/RelicBound.csproj" />
+</Solution>
